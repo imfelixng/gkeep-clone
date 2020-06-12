@@ -1,10 +1,11 @@
 import { MongoClient } from "https://deno.land/x/mongo/mod.ts";
+import { MONGO_URL, MONGO_DB_NAME } from "../../env/index.ts";
 
 let DBInstance;
 try {
     const client = new MongoClient();
-    client.connectWithUri("mongodb://localhost:27017");
-    DBInstance = client.database("gkeep-clone");
+    client.connectWithUri(MONGO_URL);
+    DBInstance = client.database(MONGO_DB_NAME);
     console.log('Connected mongodb success!');
 } catch(err) {
     console.log(err);
