@@ -12,6 +12,7 @@ try {
 }
 
 const User = DBInstance?.collection('users');
+const Account = DBInstance?.collection("accounts");
 const Note = DBInstance?.collection("notes");
 
 export { User, Note };
