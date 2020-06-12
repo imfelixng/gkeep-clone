@@ -1,4 +1,5 @@
-import { Application, Context } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "https://deno.land/x/oak/mod.ts";
+import "./loaders/index.ts";
 import { loadRoutes } from "./loaders/routes/index.ts";
 
 const app = new Application();

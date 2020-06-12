@@ -3,7 +3,8 @@
   "scripts": {
     "start": {
       "cmd": "src/app.ts",
-      "allow": ["net"]
+      "allow": ["net", "write", "read", "plugin"],
+      "unstable": true
     }
   }
 }
