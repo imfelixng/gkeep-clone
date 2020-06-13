@@ -12,9 +12,11 @@ const header: Jose = {
 };
 
 const generateToken = (dataPayload: any, expiryTime: number, secretKey: string) => {
+  const expTime = new Date().getTime() + expiryTime;
+  console.log(new Date().toISOString());
     const payload: Payload = {
       iss: "joe",
-      exp: setExpiration(new Date().getTime() + expiryTime),
+      exp: setExpiration(expTime),
       ...dataPayload,
     };
     const generated = makeJwt({ header, payload, key: secretKey });
@@ -22,8 +24,11 @@ const generateToken = (dataPayload: any, expiryTime: number, secretKey: string) 
 };
 
 const verifyToken = async (token: string, secretKey: string) => {
-  const { isValid } = await validateJwt(token, secretKey);
-  return isValid;
+  const jwtValidated: any = await validateJwt(token, secretKey);
+  return {
+    isValid: jwtValidated.isValid,
+    payload: jwtValidated.payload,
+  };
 };
 
 export { generateToken, verifyToken };
