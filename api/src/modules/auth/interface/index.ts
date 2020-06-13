@@ -15,4 +15,9 @@ interface IChangePasswordData {
     nextPassword: string
 }
 
-export { IRegisterData, ILoginData, IChangePasswordData };
+interface IRefreshTokenData {
+    _id: string,
+    email: string,
+}
+
+export { IRegisterData, ILoginData, IChangePasswordData, IRefreshTokenData };

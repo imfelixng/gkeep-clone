@@ -15,7 +15,7 @@ import {
   ACCESS_TOKEN_LIFE,
   ACCESS_TOKEN_SECRET_KEY,
 } from "../../../config/env/index.ts";
-import { IRegisterData, ILoginData, IChangePasswordData } from "../interface/index.ts";
+import { IRegisterData, ILoginData, IChangePasswordData, IRefreshTokenData } from "../interface/index.ts";
 
 const createAccountService = async (data: IRegisterData) => {
   const { email, password } = data;
@@ -135,4 +135,18 @@ const changePasswordService = async (data: IChangePasswordData) => {
   };
 };
 
-export { createAccountService, loginAccountService, changePasswordService };
+const refreshTokenService = async (data: IRefreshTokenData) => {
+  const accessToken = await generateToken(
+    data,
+    +ACCESS_TOKEN_LIFE,
+    ACCESS_TOKEN_SECRET_KEY
+  );
+  return accessToken;
+};
+
+export {
+  createAccountService,
+  loginAccountService,
+  changePasswordService,
+  refreshTokenService,
+};

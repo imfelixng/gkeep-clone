@@ -3,7 +3,8 @@ import {
   registerController,
   loginController,
   changePasswordController,
-  getCurrentUser,
+  getCurrentUserController,
+  refreshTokenController,
 } from "../controller/index.ts";
 import { authAccessMiddleware, authRefreshMiddleware } from "../../../middlewares/is-auth.ts";
 
@@ -19,13 +20,11 @@ const authRoute = (app: Application) => {
       .get("/auth/revoke-token", (context) => {
         context.response.body = "It's work!";
       })
-      .get("/auth/refresh-token", authRefreshMiddleware, (context) => {
-        context.response.body = "It's work!";
-      })
+      .get("/auth/refresh-token", authRefreshMiddleware, refreshTokenController)
       .get("/auth/force-logout", (context) => {
         context.response.body = "It's work!";
       })
-      .get("/auth/user", authAccessMiddleware, getCurrentUser);
+      .get("/auth/user", authAccessMiddleware, getCurrentUserController);
     
     app.use(router.routes());
     app.use(router.allowedMethods());
