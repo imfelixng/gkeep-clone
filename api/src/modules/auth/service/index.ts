@@ -1,4 +1,3 @@
-import { IAccountDTO } from "../interface/account.dto.ts";
 import {
   createAccountRepository,
   checkAccountExistRepository,
@@ -16,9 +15,10 @@ import {
   ACCESS_TOKEN_LIFE,
   ACCESS_TOKEN_SECRET_KEY,
 } from "../../../config/env/index.ts";
+import { IRegisterData, ILoginData, IChangePasswordData } from "../interface/index.ts";
 
-const createAccountService = async (dataDTO: IAccountDTO) => {
-  const { email, password } = dataDTO;
+const createAccountService = async (data: IRegisterData) => {
+  const { email, password } = data;
   const isAccountExistWithEmail = await checkAccountExistRepository({
     email,
   });
@@ -28,12 +28,12 @@ const createAccountService = async (dataDTO: IAccountDTO) => {
   }
 
   const hashedPassword = await hashPassword(password);
-  const data = {
+  const dataCreated = {
     email,
     password: hashedPassword,
   };
 
-  const dataResponse = await createAccountRepository(data);
+  const dataResponse = await createAccountRepository(dataCreated);
   const _id = dataResponse["$oid"];
 
   const tokenPayload = {
@@ -62,8 +62,8 @@ const createAccountService = async (dataDTO: IAccountDTO) => {
   };
 };
 
-const loginAccountService = async (dataDTO: any) => {
-  const { email, password } = dataDTO;
+const loginAccountService = async (data: ILoginData) => {
+  const { email, password } = data;
   const isAccountExistWithEmail = await checkAccountExistRepository({
     email,
   });
@@ -104,4 +104,35 @@ const loginAccountService = async (dataDTO: any) => {
   };
 };
 
-export { createAccountService, loginAccountService };
+const changePasswordService = async (data: IChangePasswordData) => {
+    const { email, currentPassword, nextPassword } = data;
+    const isAccountExistWithEmail = await checkAccountExistRepository({
+      email,
+    });
+
+    if (!isAccountExistWithEmail) {
+      throw new Error('Account not found!');
+    }
+
+    const { _id: dbIdObj, password: passwordStored } = isAccountExistWithEmail;
+
+    const isMatch = await comparePassword(currentPassword, passwordStored);
+
+    if (!isMatch) {
+      throw new Error("Password is invalid!");
+    }
+
+    const hashedPassword = await hashPassword(nextPassword);
+
+    const dataUpdated = {
+      password: hashedPassword
+    };
+
+    await updateAccountRepository({ email }, dataUpdated);
+
+  return {
+    _id: dbIdObj['$oid'],
+  };
+};
+
+export { createAccountService, loginAccountService, changePasswordService };

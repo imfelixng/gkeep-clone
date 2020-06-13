@@ -1,5 +1,9 @@
 import { Router, Application } from "https://deno.land/x/oak/mod.ts";
-import { registerController, loginController } from "../controller/index.ts";
+import {
+  registerController,
+  loginController,
+  changePasswordController,
+} from "../controller/index.ts";
 
 const authRoute = (app: Application) => {
     const router = new Router();
@@ -9,9 +13,7 @@ const authRoute = (app: Application) => {
       .get("/auth/forgot-password", (context) => {
         context.response.body = "It's work!";
       })
-      .post("/auth/change-password", (context) => {
-        context.response.body = "It's work!";
-      })
+      .post("/auth/change-password", changePasswordController)
       .get("/auth/revoke-token", (context) => {
         context.response.body = "It's work!";
       })
