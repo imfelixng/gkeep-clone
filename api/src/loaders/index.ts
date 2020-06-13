@@ -1,1 +1,1 @@
-import "./mongo/index.ts";
+import "./db/index.ts";
