@@ -1,0 +1,1 @@
+export { updateUserController } from './update-user.ts';

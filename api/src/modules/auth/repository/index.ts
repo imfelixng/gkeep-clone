@@ -1,6 +1,5 @@
 import { Account, User } from "../../../config/db/mongo/index.ts";
 import { redis } from "../../../config/db/redis/index.ts";
-import { IRegisterData } from "../interface/index.ts";
 
 const createAccountRepository = async (data: any) => {
   return Account!.insertOne(data);
