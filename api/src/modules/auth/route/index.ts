@@ -1,12 +1,10 @@
 import { Router, Application } from "https://deno.land/x/oak/mod.ts";
-import { registerController } from "../controller/index.ts";
+import { registerController, loginController } from "../controller/index.ts";
 
 const authRoute = (app: Application) => {
     const router = new Router();
     router
-      .post("/auth/login", (context) => {
-        context.response.body = "It's work!";
-      })
+      .post("/auth/login", loginController)
       .post("/auth/register", registerController)
       .get("/auth/forgot-password", (context) => {
         context.response.body = "It's work!";
