@@ -15,7 +15,13 @@ import {
   ACCESS_TOKEN_LIFE,
   ACCESS_TOKEN_SECRET_KEY,
 } from "../../../config/env/index.ts";
-import { IRegisterData, ILoginData, IChangePasswordData, IRefreshTokenData } from "../interface/index.ts";
+import {
+  IRegisterData,
+  ILoginData,
+  IChangePasswordData,
+  IRefreshTokenData,
+  IRevokeTokenData,
+} from "../interface/index.ts";
 
 const createAccountService = async (data: IRegisterData) => {
   const { email, password } = data;
@@ -41,12 +47,12 @@ const createAccountService = async (data: IRegisterData) => {
     email,
   };
 
-  const refreshToken = await generateToken(
+  const refreshToken = generateToken(
     tokenPayload,
     +REFRESH_TOKEN_LIFE,
     REFRESH_TOKEN_SECRET_KEY
   );
-  const accessToken = await generateToken(
+  const accessToken = generateToken(
     tokenPayload,
     +ACCESS_TOKEN_LIFE,
     ACCESS_TOKEN_SECRET_KEY
@@ -84,12 +90,12 @@ const loginAccountService = async (data: ILoginData) => {
     email,
   };
 
-  const refreshToken = await generateToken(
+  const refreshToken = generateToken(
     tokenPayload,
     +REFRESH_TOKEN_LIFE,
     REFRESH_TOKEN_SECRET_KEY
   );
-  const accessToken = await generateToken(
+  const accessToken = generateToken(
     tokenPayload,
     +ACCESS_TOKEN_LIFE,
     ACCESS_TOKEN_SECRET_KEY
@@ -105,43 +111,61 @@ const loginAccountService = async (data: ILoginData) => {
 };
 
 const changePasswordService = async (data: IChangePasswordData) => {
-    const { email, currentPassword, nextPassword } = data;
-    const isAccountExistWithEmail = await checkAccountExistRepository({
-      email,
-    });
+  const { email, currentPassword, nextPassword } = data;
+  const isAccountExistWithEmail = await checkAccountExistRepository({
+    email,
+  });
 
-    if (!isAccountExistWithEmail) {
-      throw new Error('Account not found!');
-    }
+  if (!isAccountExistWithEmail) {
+    throw new Error("Account not found!");
+  }
 
-    const { _id: dbIdObj, password: passwordStored } = isAccountExistWithEmail;
+  const { _id: dbIdObj, password: passwordStored } = isAccountExistWithEmail;
 
-    const isMatch = await comparePassword(currentPassword, passwordStored);
+  const isMatch = await comparePassword(currentPassword, passwordStored);
 
-    if (!isMatch) {
-      throw new Error("Password is invalid!");
-    }
+  if (!isMatch) {
+    throw new Error("Password is invalid!");
+  }
 
-    const hashedPassword = await hashPassword(nextPassword);
+  const hashedPassword = await hashPassword(nextPassword);
 
-    const dataUpdated = {
-      password: hashedPassword
-    };
+  const dataUpdated = {
+    password: hashedPassword,
+  };
 
-    await updateAccountRepository({ email }, dataUpdated);
+  await updateAccountRepository({ email }, dataUpdated);
 
   return {
-    _id: dbIdObj['$oid'],
+    _id: dbIdObj["$oid"],
   };
 };
 
 const refreshTokenService = async (data: IRefreshTokenData) => {
-  const accessToken = await generateToken(
+  const accessToken = generateToken(
     data,
     +ACCESS_TOKEN_LIFE,
     ACCESS_TOKEN_SECRET_KEY
   );
-  return accessToken;
+  return { accessToken };
+};
+
+const revokeTokenService = async (data: IRevokeTokenData) => {
+  const { email } = data;
+  const accessToken = generateToken(
+    data,
+    +ACCESS_TOKEN_LIFE,
+    ACCESS_TOKEN_SECRET_KEY
+  );
+  const refreshToken = generateToken(
+    data,
+    +REFRESH_TOKEN_LIFE,
+    REFRESH_TOKEN_SECRET_KEY
+  );
+
+  await updateAccountRepository({ email }, { refresh_token: refreshToken });
+
+  return { accessToken, refreshToken };
 };
 
 export {
@@ -149,4 +173,5 @@ export {
   loginAccountService,
   changePasswordService,
   refreshTokenService,
+  revokeTokenService,
 };

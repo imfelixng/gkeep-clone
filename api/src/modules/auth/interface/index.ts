@@ -20,4 +20,15 @@ interface IRefreshTokenData {
     email: string,
 }
 
-export { IRegisterData, ILoginData, IChangePasswordData, IRefreshTokenData };
+interface IRevokeTokenData {
+    _id: string,
+    email: string,
+}
+
+export {
+  IRegisterData,
+  ILoginData,
+  IChangePasswordData,
+  IRefreshTokenData,
+  IRevokeTokenData,
+};
