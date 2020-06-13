@@ -3,6 +3,7 @@ import {
   createAccountRepository,
   checkAccountExistRepository,
   updateAccountRepository,
+  saveAccessTokenToRedisDB,
 } from "../repository/index.ts";
 import { hashPassword } from "../../../utils/helpers/generate-password.ts";
 import { generateToken } from "../../../utils/helpers/generate-token.ts";
@@ -52,6 +53,8 @@ const createAccountService = async (dataDTO: IAccountDTO) => {
     { email },
     { refresh_token: refreshToken }
   );
+
+    await saveAccessTokenToRedisDB(accessToken);
 
   return {
     _id,

@@ -1,7 +1,7 @@
-import { connect } from "https://denopkg.com/keroxp/deno-redis/mod.ts";
+import { connect, Redis } from "https://denopkg.com/keroxp/deno-redis/mod.ts";
 
 import { REDIS_HOST, REDIS_PORT } from './../../env/index.ts';
-let redis;
+let redis: Redis;
 try {
   redis = await connect({
     hostname: REDIS_HOST,
