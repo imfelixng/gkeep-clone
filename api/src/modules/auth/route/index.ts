@@ -6,6 +6,7 @@ import {
   getCurrentUserController,
   refreshTokenController,
   revokeTokenController,
+  forceLogoutController,
 } from "../controller/index.ts";
 import { authAccessMiddleware, authRefreshMiddleware } from "../../../middlewares/is-auth.ts";
 
@@ -20,9 +21,7 @@ const authRoute = (app: Application) => {
       .post("/auth/change-password", changePasswordController)
       .get("/auth/revoke-token", authRefreshMiddleware, revokeTokenController)
       .get("/auth/refresh-token", authRefreshMiddleware, refreshTokenController)
-      .get("/auth/force-logout", authRefreshMiddleware, (context) => {
-        context.response.body = "It's work!";
-      })
+      .get("/auth/force-logout", authRefreshMiddleware, forceLogoutController)
       .get("/auth/user", authAccessMiddleware, getCurrentUserController);
     
     app.use(router.routes());

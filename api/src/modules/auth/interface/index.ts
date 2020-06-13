@@ -25,10 +25,16 @@ interface IRevokeTokenData {
     email: string,
 }
 
+interface IForceLogoutData {
+    _id: string,
+    email: string,
+}
+
 export {
   IRegisterData,
   ILoginData,
   IChangePasswordData,
   IRefreshTokenData,
   IRevokeTokenData,
+  IForceLogoutData,
 };

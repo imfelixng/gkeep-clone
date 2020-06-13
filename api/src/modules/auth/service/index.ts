@@ -168,10 +168,22 @@ const revokeTokenService = async (data: IRevokeTokenData) => {
   return { accessToken, refreshToken };
 };
 
+const forceLogoutService = async (data: IRevokeTokenData) => {
+  // Delete access_token in redis
+  const accessToken = generateToken(
+    data,
+    +ACCESS_TOKEN_LIFE,
+    ACCESS_TOKEN_SECRET_KEY
+  );
+
+  return { accessToken };
+};
+
 export {
   createAccountService,
   loginAccountService,
   changePasswordService,
   refreshTokenService,
   revokeTokenService,
+  forceLogoutService,
 };
