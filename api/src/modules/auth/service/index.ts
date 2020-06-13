@@ -3,6 +3,7 @@ import {
   checkAccountExistRepository,
   updateAccountRepository,
   saveAccessTokenToRedisDB,
+  createUserRepository,
 } from "../repository/index.ts";
 import {
   hashPassword,
@@ -24,7 +25,7 @@ import {
 } from "../interface/index.ts";
 
 const createAccountService = async (data: IRegisterData) => {
-  const { email, password } = data;
+  const { email, password, full_name } = data;
   const isAccountExistWithEmail = await checkAccountExistRepository({
     email,
   });
@@ -34,16 +35,24 @@ const createAccountService = async (data: IRegisterData) => {
   }
 
   const hashedPassword = await hashPassword(password);
-  const dataCreated = {
+  const accountCreated = {
     email,
     password: hashedPassword,
   };
 
-  const dataResponse = await createAccountRepository(dataCreated);
-  const _id = dataResponse["$oid"];
+  const accountResponse = await createAccountRepository(accountCreated);
+  const accountId = accountResponse["$oid"];
+
+  const userCreated = {
+    email,
+    full_name,
+    account_id: accountId,
+  };
+
+  await createUserRepository(userCreated);
 
   const tokenPayload = {
-    _id,
+    _id: accountId,
     email,
   };
 
@@ -62,7 +71,7 @@ const createAccountService = async (data: IRegisterData) => {
   saveAccessTokenToRedisDB(accessToken);
 
   return {
-    _id,
+    _id: accountId,
     refreshToken,
     accessToken,
   };

@@ -1,8 +1,8 @@
-import { Account } from "../../../config/db/mongo/index.ts";
+import { Account, User } from "../../../config/db/mongo/index.ts";
 import { redis } from "../../../config/db/redis/index.ts";
 import { IRegisterData } from "../interface/index.ts";
 
-const createAccountRepository = async (data: IRegisterData) => {
+const createAccountRepository = async (data: any) => {
   return Account!.insertOne(data);
 };
 
@@ -18,9 +18,14 @@ const saveAccessTokenToRedisDB = (accessToken: string) => {
   redis.lpush("access_token_list", accessToken);
 };
 
+const createUserRepository = async (data: any) => {
+  return User!.insertOne(data);
+};
+
 export {
   createAccountRepository,
   checkAccountExistRepository,
   updateAccountRepository,
   saveAccessTokenToRedisDB,
+  createUserRepository,
 };

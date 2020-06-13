@@ -1,6 +1,7 @@
 interface IRegisterData {
     email: string,
     password: string,
+    full_name: string,
     refresh_token?: string,
 }
 
