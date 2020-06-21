@@ -4,4 +4,8 @@ const createLabelRepository = async (data: any) => {
   return Label!.insertOne(data);
 };
 
-export { createLabelRepository };
+const updateLabelRepository = async (filter: any, data: any) => {
+  return Label!.updateOne(filter, { $set: data });
+};
+
+export { createLabelRepository, updateLabelRepository };

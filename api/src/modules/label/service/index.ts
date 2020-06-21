@@ -1,4 +1,7 @@
-import { createLabelRepository } from "../repository/index.ts";
+import {
+  createLabelRepository,
+  updateLabelRepository,
+} from "../repository/index.ts";
 
 const createLabelSerivce = async (creator: any, data: any) => {
     const labelCreated = await createLabelRepository({
@@ -12,6 +15,8 @@ const createLabelSerivce = async (creator: any, data: any) => {
     };
 };
 
-export {
-    createLabelSerivce
-}
+const updateLabelService = (filter: any, data: any) => {
+  return updateLabelRepository(filter, data);
+};
+
+export { createLabelSerivce, updateLabelService };
