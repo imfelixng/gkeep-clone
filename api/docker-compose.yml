@@ -1,0 +1,39 @@
+version: '3'
+services:
+  api:
+    container_name: api
+    build: .
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/app/
+    env_file: .env
+    depends_on:
+      - mongo
+      - redis
+    networks: 
+      - gkeep-clone_network
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db/mongo:/data/db
+    networks: 
+      - gkeep-clone_network
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./db/redis/:/data/db
+    networks:
+      - gkeep-clone_network
+    restart: always
+networks:
+  gkeep-clone_network:
+    driver: bridge
