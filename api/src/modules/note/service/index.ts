@@ -9,6 +9,7 @@ const createNoteSerivce = async (creator: any, data: any) => {
     const noteCreated = await createNoteRepository({
       ...data,
       status: "ACTIVE",
+      mode: "NORMAL",
       status_time: new Date().toISOString(),
       _creator: creator._id,
       _createdAt: new Date().toISOString(),
