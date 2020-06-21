@@ -19,6 +19,6 @@ export interface INote {
   images: [string],
   status: StatusEnum;
   status_time: Date;
-  creator: string;
-  _updatedAt: Date;
+  _creator: string;
+  _createdAt: Date;
 }
