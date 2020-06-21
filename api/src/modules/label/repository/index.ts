@@ -12,4 +12,14 @@ const getLabelRepository = async (filter: any) => {
   return Label!.find(filter);
 };
 
-export { createLabelRepository, updateLabelRepository, getLabelRepository };
+const deleteLabelRepository = async (filter: any) => {
+  return Label!.deleteOne(filter);
+};
+
+
+export {
+  createLabelRepository,
+  updateLabelRepository,
+  getLabelRepository,
+  deleteLabelRepository,
+};

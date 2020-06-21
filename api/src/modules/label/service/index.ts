@@ -2,6 +2,7 @@ import {
   createLabelRepository,
   updateLabelRepository,
   getLabelRepository,
+  deleteLabelRepository,
 } from "../repository/index.ts";
 
 const createLabelSerivce = async (creator: any, data: any) => {
@@ -24,4 +25,13 @@ const getLabelService = (filter: any) => {
   return getLabelRepository(filter);
 };
 
-export { createLabelSerivce, updateLabelService, getLabelService };
+const deleteLabelService = (filter: any) => {
+  return deleteLabelRepository(filter);
+};
+
+export {
+  createLabelSerivce,
+  updateLabelService,
+  getLabelService,
+  deleteLabelService,
+};
