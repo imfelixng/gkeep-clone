@@ -1,0 +1,13 @@
+.note-list {
+  &__title {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 240px);
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+  }
+}
