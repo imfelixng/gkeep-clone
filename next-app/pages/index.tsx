@@ -1,13 +1,14 @@
-import { Button } from 'antd';
-import LayoutWrapper from '../components/layout';
+import {useEffect} from "react";
+import { useRouter } from 'next/router';
 
 function Home() {
-    return (
-        <LayoutWrapper>
-            <h1 className = "text-blue-600">Test</h1>
-            <Button danger>Demo</Button>
-        </LayoutWrapper>
-    )
+    const router = useRouter();
+
+    useEffect(() => {
+        router.replace('/note');
+    }, []);
+
+    return null;
 }
 
 export default Home
