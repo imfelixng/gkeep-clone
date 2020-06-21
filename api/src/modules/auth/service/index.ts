@@ -79,7 +79,7 @@ const createAccountService = async (data: IRegisterData) => {
 
 const loginAccountService = async (data: ILoginData) => {
   const { email, password } = data;
-  const isAccountExistWithEmail = await checkAccountExistRepository({
+  const isAccountExistWithEmail: any = await checkAccountExistRepository({
     email,
   });
 
@@ -129,7 +129,7 @@ const changePasswordService = async (data: IChangePasswordData) => {
     throw new Error("Account not found!");
   }
 
-  const { _id: dbIdObj, password: passwordStored } = isAccountExistWithEmail;
+  const { _id: dbIdObj, password: passwordStored } = isAccountExistWithEmail as any;
 
   const isMatch = await comparePassword(currentPassword, passwordStored);
 
