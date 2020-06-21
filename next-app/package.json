@@ -8,13 +8,21 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "9.4.4",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "antd": "^4.3.5",
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "node-sass": "npm:sass",
+    "sass": "^1.26.8",
     "@types/node": "^14.0.13",
     "@types/react": "^16.9.38",
+    "@zeit/next-less": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "babel-plugin-import": "^1.13.0",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^1.4.6",
     "typescript": "^3.9.5"
   }
 }
