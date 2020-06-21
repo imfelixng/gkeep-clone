@@ -1,0 +1,76 @@
+.app {
+
+    &__wrapper {
+        @apply min-h-screen;
+    }
+
+    &__header {
+        height: 64px;
+        padding: 8px 16px;
+        @apply bg-white shadow-md;
+        @apply flex items-center;
+    }
+
+    &__sider {
+        @apply shadow-md;
+        &-logo {
+            height: 64px;
+            @apply w-full;
+            @apply flex items-center justify-center;
+        }
+
+        &-site {
+            font-size: 20px;
+            font-weight: 500;
+            white-space: nowrap ;
+        }
+    }
+
+    &__content {
+        padding: 16px;
+    }
+}
+
+.header {
+    &__site {
+        font-size: 20px;
+        font-weight: 500;
+        white-space: nowrap;
+        margin-right: 16px;
+    }
+
+    &__menu {
+        font-size: 20px;
+        @apply cursor-pointer;
+    }
+
+    &__search {
+        flex: 1;
+        margin-left: 16px;
+        max-width: 600px;
+    }
+
+    &__action {
+        margin-left: auto;
+
+        @apply flex items-center;
+
+        &-group {
+            margin: auto 24px;
+        }
+
+        &-mode {
+            font-size: 24px;
+            margin: 0 12px;
+        }
+
+        &-refresh {
+            font-size: 20px;
+            margin: 0 12px;
+        }
+
+        &-avatar {
+            @apply cursor-pointer;
+        }
+    }
+}

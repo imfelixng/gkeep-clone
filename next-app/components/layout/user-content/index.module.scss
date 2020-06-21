@@ -1,0 +1,19 @@
+.user-content {
+  min-width: 200px;
+  max-width: 300px;
+  @apply flex flex-col items-center;
+
+  &__info {
+    margin: 12px auto;
+    @apply text-center;
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  &__email {
+    font-weight: 300;
+  }
+}
