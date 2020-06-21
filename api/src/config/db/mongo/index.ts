@@ -14,5 +14,6 @@ try {
 const User = DBInstance?.collection('users');
 const Account = DBInstance?.collection("accounts");
 const Note = DBInstance?.collection("notes");
+const Label = DBInstance?.collection("labels");
 
-export { User, Note, Account };
+export { User, Note, Account, Label };

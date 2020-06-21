@@ -1,0 +1,1 @@
+export { createLabelController } from './create-label.ts';
