@@ -1,0 +1,28 @@
+.login {
+    @apply h-full w-full flex items-center justify-center;
+
+    &__wrapper {
+        max-width: 1000px;
+        @apply w-full items-center;
+    }
+
+    &__form {
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+    }
+}
+
+.form {
+    &__action {
+        @apply flex;
+
+        &-btn {
+            flex: 1;
+
+            &:first-child {
+                margin-right: 12px;
+            }
+        }
+    }
+}
