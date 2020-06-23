@@ -1,6 +1,8 @@
 import React from 'react';
-import style from "../index.module.scss";
 import {Button, Form, Input} from "antd";
+import Link from 'next/link';
+
+import style from "../index.module.scss";
 import AuthWrapper from "../wrapper";
 
 const RegisterPage = () => {
@@ -44,9 +46,11 @@ const RegisterPage = () => {
                         <Button type="primary" htmlType="submit" className={style['form__action-btn']}>
                             Register
                         </Button>
-                        <Button className={style['form__action-btn']}>
-                            Back to sign in
-                        </Button>
+                        <Link href = "/auth/login">
+                            <Button className={style['form__action-btn']}>
+                                Back to sign in
+                            </Button>
+                        </Link>
                     </div>
                 </Form.Item>
             </Form>

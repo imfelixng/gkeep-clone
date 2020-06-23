@@ -26,6 +26,9 @@
         margin: auto;
     }
 
+    &__tool {
+        @apply flex justify-between;
+    }
     &__action {
         @apply flex;
 
