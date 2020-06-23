@@ -1,5 +1,4 @@
 .app {
-
     &__wrapper {
         @apply min-h-screen;
     }
@@ -22,7 +21,13 @@
         &-site {
             font-size: 20px;
             font-weight: 500;
-            white-space: nowrap ;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+            text-overflow: ellipsis;
+            &--none {
+                display: none;
+            }
         }
     }
 
@@ -38,6 +43,12 @@
         font-weight: 500;
         white-space: nowrap;
         margin-right: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: 0.2s;
+        &--none {
+            display: none;
+        }
     }
 
     &__menu {

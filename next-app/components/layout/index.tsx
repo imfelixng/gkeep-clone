@@ -14,6 +14,8 @@ import {
     ReloadOutlined
 } from '@ant-design/icons';
 
+import classNames from 'classnames';
+
 import style from './index.module.scss';
 import UserContent from "./user-content";
 
@@ -42,11 +44,7 @@ const LayoutWrapper = ({ children }: any) => {
                         src = "https://www.gstatic.com/images/branding/product/1x/keep_48dp.png"
                         alt = "App Logo"
                     />
-                    {
-                        !isCollapseSider && (
-                            <span className={style['app__sider-site']}>GKeep Clone</span>
-                        )
-                    }
+                    <span className={classNames(style['app__sider-site'], isCollapseSider ? style['app__sider-site--none'] : '')}>GKeep Clone</span>
                 </div>
                 <Menu mode="inline" defaultSelectedKeys={['1']}>
                     <Menu.Item key="notes" icon={<BulbOutlined style = {{ fontSize: 20 }}/>}>
@@ -71,11 +69,7 @@ const LayoutWrapper = ({ children }: any) => {
             </Sider>
             <Layout className={style['app__wrapper']}>
                 <div className = {style['app__header']}>
-                    {
-                        isCollapseSider && (
-                            <span className={style['header__site']}>GKeep Clone</span>
-                        )
-                    }
+                    <span className={classNames(style['header__site'], !isCollapseSider ? style['header__site--none'] : '')}>GKeep Clone</span>
                     <MenuOutlined className = {style['header__menu']} onClick = {_handleToggleSider} />
                     <div className = {style['header__search']}>
                         <Input size="large" placeholder="Search" prefix={<SearchOutlined />} />
