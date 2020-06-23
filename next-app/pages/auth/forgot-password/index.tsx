@@ -6,6 +6,7 @@ import AuthWrapper from "../wrapper";
 const ForgotPasswordPage = () => {
     return (
         <AuthWrapper>
+            <h1 className={style['form__header']}>Forgot Password</h1>
             <Form
                 layout="vertical"
                 className={style['form__content']}

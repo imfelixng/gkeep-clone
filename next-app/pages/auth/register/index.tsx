@@ -6,6 +6,7 @@ import AuthWrapper from "../wrapper";
 const RegisterPage = () => {
     return (
         <AuthWrapper>
+            <h1 className={style['form__header']}>Register</h1>
             <Form
                 layout="vertical"
                 className={style['form__content']}
@@ -44,7 +45,7 @@ const RegisterPage = () => {
                             Register
                         </Button>
                         <Button className={style['form__action-btn']}>
-                            Sign in
+                            Back to sign in
                         </Button>
                     </div>
                 </Form.Item>

@@ -6,6 +6,7 @@ import AuthWrapper from "../wrapper";
 const LoginPage = () => {
     return (
         <AuthWrapper>
+            <h1 className={style['form__header']}>Login</h1>
             <Form
                 layout="vertical"
                 className={style['form__content']}
