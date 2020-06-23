@@ -84,6 +84,7 @@ const LayoutWrapper = ({ children }: any) => {
                         <div className = {style['header__action-group']}>
                             <ReloadOutlined className = {style['header__action-refresh']}/>
                             <AppstoreOutlined className = {style['header__action-mode']}/>
+                            <BellOutlined className={style['header__action-noti']} />
                         </div>
                         <Popover placement="bottomRight" content={UserContent} trigger="click">
                             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }} size = {36} className = {style['header__action-avatar']}>U</Avatar>
